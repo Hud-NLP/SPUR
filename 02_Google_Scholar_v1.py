@@ -1,39 +1,31 @@
-#Using code from: https://pypi.org/project/scholarly/
-#
-#pip3 install scholarly
-#
-#Gave warnings:
-#  WARNING: The script pygmentize.exe is installed in 'C:\Users\Staff\AppData\Roaming\Python\Python37\Scripts' which is not on PATH.
-#  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
-#  WARNING: The script pybabel.exe is installed in 'C:\Users\Staff\AppData\Roaming\Python\Python37\Scripts' which is not on PATH.
-#  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
-#  WARNING: The scripts sphinx-apidoc.exe, sphinx-autogen.exe, sphinx-build.exe and sphinx-quickstart.exe are installed in 'C:\Users\Staff\AppData\Roaming\Python\Python37\
-#Scripts' which is not on PATH.
-#  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
-#  WARNING: The scripts futurize.exe and pasteurize.exe are installed in 'C:\Users\Staff\AppData\Roaming\Python\Python37\Scripts' which is not on PATH.
-#  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
-#  WARNING: The script dotenv.exe is installed in 'C:\Users\Staff\AppData\Roaming\Python\Python37\Scripts' which is not on PATH.
-#  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
-
-# Example code from webpage
+# Using code adapted from: https://pypi.org/project/scholarly/
+# This code requires the scholarly library: pip3 install scholarly
 
 from scholarly import scholarly
 import NeoQuery
 from Functions import msg, return_alphanum
 
-'''
-match(s:staff) where
-    s.name = "Simon Barrans" or
-    s.name = "Grigoris Antoniou" or
-    s.name = "Adrian Pitts" or
-    s.name = "Paul Thomas"
-set s.gsname = s.name
+# Before running the code, the database needs to have the Google Scholar name for each person added:
+# match(s:staff) where
+#    s.name = "Simon Barrans" or
+#    s.name = "Grigoris Antoniou" or
+#    s.name = "Adrian Pitts" or
+#    s.name = "Paul Thomas"
+# set s.gsname = s.name
+#
+# The following code can be used to delete publications after running the code below:
+# match(s:staff)-[:publication]-(p:publication)
+# detach delete p
 
-match(s:staff)-[:publication]-(p:publication)
-detach delete p
-'''
 
 case = 4
+# Cases
+# 4: Most recent working code
+# 3: Prior code that worked, but created a single, large, database query to create all publications for a person.
+#    When this code was run, the database hung for the user who had around 500 publications. So the code was updated
+#    to Case 4, where a new query is created for each publication.
+# 2: Adaptation of 1 to test that the code could be adapated.
+# 1: Example code from https://pypi.org/project/scholarly/ showing a working example of the API.
 
 if case == 4:
     msg("CASE 4")
